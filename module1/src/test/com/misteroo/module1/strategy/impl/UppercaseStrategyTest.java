@@ -1,9 +1,9 @@
-package com.misteroo.module1.strategy;
+package com.misteroo.module1.strategy.impl;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.misteroo.module1.strategy.UppercaseStrategy;
+import com.misteroo.module1.strategy.impl.UppercaseStrategy;
 
 public class UppercaseStrategyTest {
 
