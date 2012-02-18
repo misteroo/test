@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="module1" basedir=".">
+
+	<property name="build.dir" value="build" />
+	<property name="classes.dir" value="classes" />
+	<property name="data.dir" value="data" />
+	<property name="classes.test.dir" value="${classes.dir}/test" />
+	<property name="data.test.dir" value="${data.dir}/test" />
+	
+	<property name="javac.path" value="D:/tools/jdk1.6.0_25/bin/javac" />
+	<property name="javac.source" value="1.6" />
+	<property name="javac.target" value="1.6" />
+
+    <path id="compile.classpath">
+        <fileset dir="lib">
+            <include name="*.jar" />
+            <exclude name="junit-4.5.jar" />
+        </fileset>
+    </path>
+
+    <path id="compile.test.classpath">
+        <fileset dir="lib">
+            <include name="junit-4.5.jar" />
+        </fileset>
+        <fileset dir="build">
+            <include name="*.jar" />
+        </fileset>
+    	<pathelement path="${classes.test.dir}"/>
+    </path>
+
+	<target name="init">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${classes.dir}"/>
+		<mkdir dir="${classes.test.dir}"/>
+		<mkdir dir="${data.test.dir}"/>
+    </target>
+	
+    <target name="compile" depends="init">
+
+        <javac srcdir="src/java" destdir="${classes.dir}" debug="on" debuglevel="lines,vars,source" fork="true" executable="${javac.path}" source="${javac.source}" target="${javac.target}" encoding="ISO-8859-1">
+            <classpath refid="compile.classpath" />
+        </javac>
+    	
+    </target>
+
+    <target name="jar" depends="compile">
+
+        <jar destfile="${build.dir}/${ant.project.name}.jar">
+            <fileset dir="${classes.dir}" />
+        </jar>
+    	
+    </target>
+
+    <target name="compile-test" depends="jar">
+
+        <javac srcdir="src/test" destdir="${classes.test.dir}" debug="on" debuglevel="lines,vars,source" fork="true" executable="${javac.path}" source="${javac.source}" target="${javac.target}" encoding="ISO-8859-1">
+            <classpath refid="compile.test.classpath" />
+        </javac>
+
+    </target>
+
+    <target name="test" depends="compile-test">
+    	
+    	<property name="myclasspath" refid="compile.test.classpath"/>
+    	<echo message="classpath= ${myclasspath}"/>
+    	
+        <junit printsummary="true" haltonfailure="false">
+            <classpath refid="compile.test.classpath" />
+            <sysproperty key="debug" value="true" />
+            <sysproperty key="data.dir" value="./data" />
+			<formatter type="brief" usefile="false"/>
+            <formatter type="xml"/>
+            <batchtest todir="${data.test.dir}">
+                <fileset dir="${classes.test.dir}" >
+                	<include name="**/*Test.class" />
+               	</fileset>
+            </batchtest>
+        </junit>
+    	
+    </target>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<delete dir="${classes.dir}" />
+		<delete dir="${data.dir}" />
+	</target>
+	
+</project>
