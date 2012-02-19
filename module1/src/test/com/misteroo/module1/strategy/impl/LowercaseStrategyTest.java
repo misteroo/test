@@ -15,6 +15,6 @@ public class LowercaseStrategyTest {
 	public void should_convert_to_lowercase() {
 		LowercaseStrategy strategy = new LowercaseStrategy();
 		String result = strategy.write("Mister Oo");
-		Assert.assertEquals("Hello mister oo", result);
+		Assert.assertEquals("hello mister oo", result);
 	}
 }
