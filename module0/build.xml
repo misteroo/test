@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="module1" basedir=".">
+<project name="module0" basedir=".">
+
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
 
 	<property name="build.dir" value="build" />
 	<property name="classes.dir" value="classes" />
@@ -12,14 +14,14 @@
 	<property name="javac.target" value="1.6" />
 
     <path id="compile.classpath">
-        <fileset dir="lib">
+        <fileset dir="../${module.dir}/lib">
             <include name="*.jar" />
             <exclude name="junit-4.5.jar" />
         </fileset>
     </path>
 
     <path id="compile.test.classpath">
-        <fileset dir="lib">
+        <fileset dir="../${module.dir}/lib">
             <include name="junit-4.5.jar" />
         </fileset>
         <fileset dir="build">
@@ -37,7 +39,7 @@
 	
     <target name="compile" depends="init">
 
-        <javac srcdir="src/java" destdir="${classes.dir}" debug="on" debuglevel="lines,vars,source" fork="true" executable="${javac.path}" source="${javac.source}" target="${javac.target}" encoding="ISO-8859-1">
+        <javac srcdir="../${module.dir}/src/java" destdir="${classes.dir}" debug="on" debuglevel="lines,vars,source" fork="true" executable="${javac.path}" source="${javac.source}" target="${javac.target}" encoding="ISO-8859-1">
             <classpath refid="compile.classpath" />
         </javac>
     	
@@ -45,7 +47,7 @@
 
     <target name="jar" depends="compile">
 
-        <jar destfile="${build.dir}/${ant.project.name}.jar">
+        <jar destfile="${build.dir}/${module.dir}.jar">
             <fileset dir="${classes.dir}" />
         </jar>
     	
@@ -53,7 +55,7 @@
 
     <target name="compile-test" depends="jar">
 
-        <javac srcdir="src/test" destdir="${classes.test.dir}" debug="on" debuglevel="lines,vars,source" fork="true" executable="${javac.path}" source="${javac.source}" target="${javac.target}" encoding="ISO-8859-1">
+        <javac srcdir="../${module.dir}/src/test" destdir="${classes.test.dir}" debug="on" debuglevel="lines,vars,source" fork="true" executable="${javac.path}" source="${javac.source}" target="${javac.target}" encoding="ISO-8859-1">
             <classpath refid="compile.test.classpath" />
         </javac>
 
@@ -87,4 +89,12 @@
 		<delete dir="${data.dir}" />
 	</target>
 	
+	<target name="dependencies">
+		<var name="module.dir" value="module2" />
+		<antcall target="test" inheritall="true" />
+		
+		<var name="module.dir" value="module1" />
+		<antcall target="test" inheritall="true" />
+	</target>
+		
 </project>
