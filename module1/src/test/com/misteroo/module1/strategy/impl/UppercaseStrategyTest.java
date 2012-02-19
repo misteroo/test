@@ -5,6 +5,12 @@ import org.junit.Test;
 
 import com.misteroo.module1.strategy.impl.UppercaseStrategy;
 
+/**
+ * Classe de tests.
+ * 
+ * @author laurent
+ *
+ */
 public class UppercaseStrategyTest {
 
 	@Test
