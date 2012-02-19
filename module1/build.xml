@@ -61,6 +61,8 @@
 
     <target name="test" depends="compile-test">
     	
+    	<echo message="Git branch name is : ${git_branch}"/>
+    	
     	<property name="myclasspath" refid="compile.test.classpath"/>
     	<echo message="classpath= ${myclasspath}"/>
     	
