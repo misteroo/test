@@ -3,6 +3,12 @@ package com.misteroo.module1.strategy.impl;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Classe de tests
+ * 
+ * @author laurent
+ *
+ */
 public class LowercaseStrategyTest {
 
 	@Test
