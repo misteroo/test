@@ -3,6 +3,12 @@ package com.misteroo.module1.strategy;
 import com.misteroo.module1.strategy.impl.LowercaseStrategy;
 import com.misteroo.module1.strategy.impl.UppercaseStrategy;
 
+/**
+ * Classe principale.
+ * 
+ * @author laurent
+ *
+ */
 public class HelloWorld {
 
 	/**
