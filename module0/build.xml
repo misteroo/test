@@ -98,8 +98,3 @@
 	</target>
 		
 </project>
-
-<!--
-	commande pour créer un job automatiquement :
-	java -jar hudson-cli.jar -s http://localhost:9090/hudson create-job FOO < c:\Temp\config.xml
--->
