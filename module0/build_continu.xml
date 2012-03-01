@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="module0" basedir=".">
+
+	<target name="test">
+		<property name="module.dir" value="${ant.project.name}" />
+		<ant antfile="../config/integration_build/build_integration.xml" target="test" inheritall="true" />
+	</target>
+
+</project>
